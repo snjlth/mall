@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 前台订单自定义Dao
+ * 前台订单管理自定义Dao
  * Created by macro on 2018/9/4.
  */
 public interface PortalOrderDao {
@@ -37,4 +37,18 @@ public interface PortalOrderDao {
      */
     int releaseSkuStockLock(@Param("itemList") List<OmsOrderItem> orderItemList);
 
+    /**
+     * 根据商品的skuId来锁定库存
+     */
+    int lockStockBySkuId(@Param("productSkuId")Long productSkuId,@Param("quantity") Integer quantity);
+
+    /**
+     * 根据商品的skuId扣减真实库存
+     */
+    int reduceSkuStock(@Param("productSkuId")Long productSkuId,@Param("quantity") Integer quantity);
+
+    /**
+     * 根据商品的skuId释放库存
+     */
+    int releaseStockBySkuId(@Param("productSkuId")Long productSkuId,@Param("quantity") Integer quantity);
 }
